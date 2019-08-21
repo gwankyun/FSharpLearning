@@ -25,6 +25,11 @@ module Tree =
             let right = comptree (2 * k + 1) (n - 1)
             Branch(k, left, right)
 
+    let rec reflect (tree: Tree<'a>) =
+        match tree with
+        | Leaf -> Leaf
+        | Branch(v, left, right) -> Branch(v, reflect right, reflect left)
+
 [<EntryPoint>]
 let main argv =
     printfn "Hello World from F#!"
@@ -33,4 +38,6 @@ let main argv =
     printfn "depth: %i" (Tree.depth tree)
     let ct = Tree.comptree 1 5
     printfn "comptree:%A" ct
+    let lt = Tree.reflect ct
+    printfn "reflect:%A" lt
     0 // return an integer exit code
