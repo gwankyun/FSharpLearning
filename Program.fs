@@ -9,12 +9,12 @@ type Tree<'a> =
 module Tree =
     let rec size (tree: Tree<'a>) =
         match tree with
-        | Branch(_, left, right) -> 1 + (size left) + (size right)
+        | Branch(_, left, right) -> 1 + size left + size right
         | Leaf -> 0
 
     let rec depth (tree: Tree<'a>) =
         match tree with
-        | Branch(_, left, right) -> (1 + max (size left) (size right))
+        | Branch(_, left, right) -> 1 + max (size left) (size right)
         | Leaf -> 0
 
     let rec comptree k n =
