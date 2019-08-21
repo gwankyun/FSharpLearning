@@ -13,4 +13,6 @@ let main argv =
     printfn "comptree:%A" ct
     let lt = Tree.reflect ct
     printfn "reflect:%A" lt
+    let compsame = Tree.compsame 0 5
+    printfn "compsame:%A" compsame
     0 // return an integer exit code

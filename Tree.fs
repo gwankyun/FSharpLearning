@@ -27,3 +27,12 @@ module Tree =
         match tree with
         | Leaf -> Leaf
         | Branch(v, left, right) -> Branch(v, reflect right, reflect left)
+
+    //習題 4.13
+    let rec compsame k n =
+        match n with
+        | 0 -> Leaf
+        | _ ->
+            let left = compsame k (n - 1)
+            let right = compsame k (n - 1)
+            Branch(k, left, right)
