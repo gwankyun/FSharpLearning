@@ -1,0 +1,16 @@
+﻿namespace Tree
+
+type Tree<'a> =
+    | Branch of 'a * Tree<'a> * Tree<'a>
+    | Leaf
+
+module Tree =
+    val size : Tree<'a> -> int
+
+    val depth : Tree<'a> -> int
+
+    val comptree : int -> int -> Tree<int>
+
+    val reflect : Tree<'a>  -> Tree<'a>
+
+    val compsame : 'a -> int -> Tree<'a>
