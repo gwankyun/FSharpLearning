@@ -36,3 +36,11 @@ module Tree =
             let left = compsame k (n - 1)
             let right = compsame k (n - 1)
             Branch(k, left, right)
+
+    //習題 4.15
+    let rec isReflect (a: Tree<'a>) (b: Tree<'a>) =
+        match (a, b) with
+        | (Leaf, Leaf) -> true
+        | (Branch(va, la, ra), Branch(vb, lb, rb)) ->
+            va = vb && isReflect la rb && isReflect ra lb
+        | _ -> false

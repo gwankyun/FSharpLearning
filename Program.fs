@@ -15,4 +15,5 @@ let main argv =
     printfn "reflect:%A" lt
     let compsame = Tree.compsame 0 5
     printfn "compsame:%A" compsame
+    printfn "isReflect:%A" (Tree.isReflect ct (Tree.reflect ct))
     0 // return an integer exit code

@@ -14,3 +14,5 @@ module Tree =
     val reflect : Tree<'a>  -> Tree<'a>
 
     val compsame : 'a -> int -> Tree<'a>
+
+    val isReflect : Tree<'a> -> Tree<'a> -> bool when 'a : equality
