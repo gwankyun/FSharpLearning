@@ -18,3 +18,5 @@ module Tree =
     val isReflect : Tree<'a> -> Tree<'a> -> bool when 'a : equality
 
     val preorder : Tree<'a> -> 'a list
+
+    val inorder : Tree<'a> -> 'a list

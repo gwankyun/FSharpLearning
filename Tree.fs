@@ -49,3 +49,8 @@ module Tree =
         match tree with
         | Leaf -> []
         | Branch(x, left, right) -> [x] @ preorder left @ preorder right
+
+    let rec inorder (tree: Tree<'a>) =
+        match tree with
+        | Leaf -> []
+        | Branch(x, left, right) -> inorder left @ [x] @ inorder right

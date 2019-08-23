@@ -17,4 +17,5 @@ let main argv =
     printfn "compsame:%A" compsame
     printfn "isReflect:%A" (Tree.isReflect ct (Tree.reflect ct))
     printfn "preorder:%A" (Tree.preorder ct)
+    printfn "inorder:%A" (Tree.inorder ct)
     0 // return an integer exit code
