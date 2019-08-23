@@ -44,3 +44,8 @@ module Tree =
         | (Branch(va, la, ra), Branch(vb, lb, rb)) ->
             va = vb && isReflect la rb && isReflect ra lb
         | _ -> false
+
+    let rec preorder (tree: Tree<'a>) =
+        match tree with
+        | Leaf -> []
+        | Branch(x, left, right) -> [x] @ preorder left @ preorder right
