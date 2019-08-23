@@ -20,3 +20,5 @@ module Tree =
     val preorder : Tree<'a> -> 'a list
 
     val inorder : Tree<'a> -> 'a list
+
+    val postorder : Tree<'a> -> 'a list

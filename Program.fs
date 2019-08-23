@@ -18,4 +18,5 @@ let main argv =
     printfn "isReflect:%A" (Tree.isReflect ct (Tree.reflect ct))
     printfn "preorder:%A" (Tree.preorder ct)
     printfn "inorder:%A" (Tree.inorder ct)
+    printfn "postorder:%A" (Tree.postorder ct)
     0 // return an integer exit code
