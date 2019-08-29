@@ -26,3 +26,5 @@ module Tree =
     val balpre : 'a list -> Tree<'a>
 
     val balin : 'a list -> Tree<'a>
+
+    val balpost : 'a list -> Tree<'a>

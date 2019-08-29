@@ -12,7 +12,7 @@ module Tree =
 
         let beforeLast (lst: 'a list) =
             let length = List.length lst
-            List.take (length - 1)
+            List.take (length - 1) lst
 
     let rec size (tree: Tree<'a>) =
         match tree with
@@ -89,3 +89,15 @@ module Tree =
                 let left = balin f
                 let right = balin t
                 Branch(h, left, right)
+
+    let rec balpost (lst: 'a list) =
+        match lst with
+        | [] -> Leaf
+        | _ ->
+            let (f, s) = List.split2 lst
+            match s with
+            | [] -> Leaf
+            | _ ->
+                let left = balpost f
+                let right = balpost (List.beforeLast s)
+                Branch(List.last s, left, right)
