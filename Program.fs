@@ -19,4 +19,6 @@ let main argv =
     printfn "preorder:%A" (Tree.preorder ct)
     printfn "inorder:%A" (Tree.inorder ct)
     printfn "postorder:%A" (Tree.postorder ct)
+    let ls = [1..9]
+    printfn "balpre:%A" (ls |> Tree.balpre |> Tree.preorder)
     0 // return an integer exit code

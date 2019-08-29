@@ -5,6 +5,15 @@ type Tree<'a> =
     | Leaf
 
 module Tree =
+    module List =
+        let split2 (lst: 'a list) =
+            let k = (List.length lst) / 2
+            List.splitAt k lst
+
+        let beforeLast (lst: 'a list) =
+            let length = List.length lst
+            List.take (length - 1)
+
     let rec size (tree: Tree<'a>) =
         match tree with
         | Branch(_, left, right) -> 1 + size left + size right
@@ -59,3 +68,12 @@ module Tree =
         match tree with
         | Leaf -> []
         | Branch(x, left, right) -> postorder left @ postorder right @ [x]
+
+    let rec balpre (lst: 'a list) =
+        match lst with
+        | [] -> Leaf
+        | h::t ->
+            let (f, s) = List.split2 t
+            let left = balpre f
+            let right = balpre s
+            Branch(h, left, right)
