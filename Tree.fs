@@ -5,7 +5,7 @@ type Tree<'a> =
     | Leaf
 
 module Tree =
-    module List =
+    module private List =
         let split2 (lst: 'a list) =
             let k = (List.length lst) / 2
             List.splitAt k lst

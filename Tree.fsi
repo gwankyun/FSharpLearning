@@ -5,6 +5,11 @@ type Tree<'a> =
     | Leaf
 
 module Tree =
+    module List =
+        val split2 : 'a list -> 'a list
+
+        val beforeLast : 'a list -> 'a list
+
     val size : Tree<'a> -> int
 
     val depth : Tree<'a> -> int
