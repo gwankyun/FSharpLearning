@@ -77,3 +77,15 @@ module Tree =
             let left = balpre f
             let right = balpre s
             Branch(h, left, right)
+
+    let rec balin (lst: 'a list) =
+        match lst with
+        | [] -> Leaf
+        | _ ->
+            let (f, s) = List.split2 lst
+            match s with
+            | [] -> Leaf
+            | h::t ->
+                let left = balin f
+                let right = balin t
+                Branch(h, left, right)

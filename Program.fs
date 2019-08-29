@@ -21,4 +21,5 @@ let main argv =
     printfn "postorder:%A" (Tree.postorder ct)
     let ls = [1..9]
     printfn "balpre:%A" (ls |> Tree.balpre |> Tree.preorder)
+    printfn "balin:%A" (ls |> Tree.balin |> Tree.inorder)
     0 // return an integer exit code
