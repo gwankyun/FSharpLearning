@@ -5,7 +5,7 @@ type Tree<'a> =
     | Leaf
 
 module Tree =
-    module List =
+    module private List =
         val split2 : 'a list -> 'a list
 
         val beforeLast : 'a list -> 'a list
