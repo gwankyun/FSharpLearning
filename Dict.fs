@@ -30,3 +30,18 @@ module Dict =
             | StringCompare.Greater -> lookup left b
             | StringCompare.Equal -> Some x
             | StringCompare.Less -> lookup right b
+
+    let rec insert (dict: Dict<'a>) (key: string) (value: 'a) =
+        match (dict, key, value) with
+        | (Leaf, _, _) -> Branch((key, value), Leaf, Leaf)
+        | (Branch((k, v), left, right), _, _) ->
+            let data = (k, v)
+            match (String.compare k key) with
+            | StringCompare.Greater ->
+                let lf = insert left key value
+                Branch(data, lf, right)
+            | StringCompare.Equal ->
+                Branch(data, left, right)
+            | StringCompare.Less ->
+                let rg = insert right key value
+                Branch(data, left, rg)
