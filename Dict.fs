@@ -14,11 +14,11 @@ module Dict =
         let compare (a: string) (b: string) =
             let c = a.CompareTo(b)
             if c > 0 then
-                StringCompare.Greater
+                Greater
             else if c = 0 then
-                StringCompare.Equal
+                Equal
             else
-                StringCompare.Less
+                Less
 
     let empty = Leaf
 
@@ -27,9 +27,9 @@ module Dict =
         | (Leaf, _) -> None
         | (Branch((a, x), left, right), b) ->
             match (String.compare a b) with
-            | StringCompare.Greater -> lookup left b
-            | StringCompare.Equal -> Some x
-            | StringCompare.Less -> lookup right b
+            | Greater -> lookup left b
+            | Equal -> Some x
+            | Less -> lookup right b
 
     let rec insert (dict: Dict<'a>) (key: string) (value: 'a) =
         match (dict, key, value) with
@@ -37,11 +37,11 @@ module Dict =
         | (Branch((k, v), left, right), _, _) ->
             let data = (k, v)
             match (String.compare k key) with
-            | StringCompare.Greater ->
+            | Greater ->
                 let lf = insert left key value
                 Branch(data, lf, right)
-            | StringCompare.Equal ->
+            | Equal ->
                 Branch(data, left, right)
-            | StringCompare.Less ->
+            | Less ->
                 let rg = insert right key value
                 Branch(data, left, rg)
