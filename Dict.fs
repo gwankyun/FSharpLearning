@@ -22,14 +22,14 @@ module Dict =
 
     let empty = Leaf
 
-    let rec lookup (dict: Dict<'a>) (key: string) =
-        match (dict, key) with
-        | (Leaf, _) -> None
-        | (Branch((a, x), left, right), b) ->
-            match (String.compare a b) with
-            | Greater -> lookup left b
+    let rec lookup (key: string) (dict: Dict<'a>) =
+        match dict with
+        | Leaf -> None
+        | Branch((a, x), left, right) ->
+            match (String.compare a key) with
+            | Greater -> lookup key left
             | Equal -> Some x
-            | Less -> lookup right b
+            | Less -> lookup key right
 
     let rec insert (dict: Dict<'a>) (key: string) (value: 'a) =
         match (dict, key, value) with
