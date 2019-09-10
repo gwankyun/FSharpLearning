@@ -31,17 +31,17 @@ module Dict =
             | Equal -> Some x
             | Less -> lookup key right
 
-    let rec insert (dict: Dict<'a>) (key: string) (value: 'a) =
-        match (dict, key, value) with
-        | (Leaf, _, _) -> Branch((key, value), Leaf, Leaf)
-        | (Branch((k, v), left, right), _, _) ->
+    let rec insert (key: string) (value: 'a) (dict: Dict<'a>) : Dict<'a> =
+        match dict with
+        | Leaf -> Branch((key, value), Leaf, Leaf)
+        | Branch((k, v), left, right) ->
             let data = (k, v)
             match (String.compare k key) with
             | Greater ->
-                let lf = insert left key value
+                let lf = insert key value left
                 Branch(data, lf, right)
             | Equal ->
                 Branch(data, left, right)
             | Less ->
-                let rg = insert right key value
+                let rg = insert key value right
                 Branch(data, left, rg)

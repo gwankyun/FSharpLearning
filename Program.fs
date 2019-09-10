@@ -2,6 +2,7 @@
 
 open System
 open Tree
+open Dict
 
 [<EntryPoint>]
 let main argv =
@@ -23,4 +24,6 @@ let main argv =
     printfn "balpre:%A" (ls |> Tree.balpre |> Tree.preorder)
     printfn "balin:%A" (ls |> Tree.balin |> Tree.inorder)
     printfn "balpost:%A" (ls |> Tree.balpost |> Tree.postorder)
+    let dict = Dict.empty |> Dict.insert "3" 3 |> Dict.insert "7" 7 |> Dict.insert "2" 2 |> Dict.insert "1" 1
+    printfn "dict:%A" dict
     0 // return an integer exit code
