@@ -43,5 +43,5 @@ module Dict =
             | Equal ->
                 Branch(data, left, right)
             | Less ->
-                let rg = insert key value right
-                Branch(data, left, rg)
+                let rt = insert key value right
+                Branch(data, left, rt)
