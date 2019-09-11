@@ -3,6 +3,7 @@
 open System
 open Tree
 open Dict
+open OrderedSet
 
 [<EntryPoint>]
 let main argv =
@@ -26,4 +27,5 @@ let main argv =
     printfn "balpost:%A" (ls |> Tree.balpost |> Tree.postorder)
     let dict = Dict.empty |> Dict.insert "3" 3 |> Dict.insert "7" 7 |> Dict.insert "2" 2 |> Dict.insert "1" 1
     printfn "dict:%A" dict
+    printfn "OrderedSet:%A" (OrderedSet.empty |> OrderedSet.add 1 |> OrderedSet.add 2 |> OrderedSet.add 3)
     0 // return an integer exit code

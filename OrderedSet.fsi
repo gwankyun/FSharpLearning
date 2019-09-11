@@ -7,3 +7,5 @@ module OrderedSet =
     val empty : OrderedSet<'a>
 
     val isEmpty : OrderedSet<'a> -> bool
+
+    val add : 'a -> OrderedSet<'a> -> OrderedSet<'a>
