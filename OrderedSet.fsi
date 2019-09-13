@@ -9,3 +9,5 @@ module OrderedSet =
     val isEmpty : OrderedSet<'a> -> bool
 
     val add : 'a -> OrderedSet<'a> -> OrderedSet<'a>
+
+    val remove : 'a -> OrderedSet<'a> -> OrderedSet<'a>
