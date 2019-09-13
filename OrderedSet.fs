@@ -63,3 +63,7 @@ module OrderedSet =
                 let lv = l.Value
                 inner (lv :: ls) (s |> remove lv)
         inner [] set
+
+    let contains (key: 'a) (set: OrderedSet<'a>) =
+        let (_, s, l) = set
+        s |> Map.containsKey key

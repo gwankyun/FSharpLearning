@@ -13,3 +13,5 @@ module OrderedSet =
     val remove : 'a -> OrderedSet<'a> -> OrderedSet<'a>
 
     val toList : OrderedSet<'a> -> 'a list
+
+    val contains : 'a -> OrderedSet<'a> -> bool
