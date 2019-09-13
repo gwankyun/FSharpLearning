@@ -53,3 +53,13 @@ module OrderedSet =
                     let (_, nn) = s |> Map.find nv
                     (f, s |> Map.add pv (lp, n) |> Map.add nv (p, nn), l)
             | None -> set
+
+    let toList (set: OrderedSet<'a>) =
+        let rec inner (ls: 'a list) (s: OrderedSet<'a>) =
+            match s |> isEmpty with
+            | true -> ls
+            | false ->
+                let (f, _, l) = s
+                let fv = f.Value
+                inner (fv :: ls) (s |> remove fv)
+        (inner [] set) |> List.rev

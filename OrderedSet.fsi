@@ -11,3 +11,5 @@ module OrderedSet =
     val add : 'a -> OrderedSet<'a> -> OrderedSet<'a>
 
     val remove : 'a -> OrderedSet<'a> -> OrderedSet<'a>
+
+    val toList : OrderedSet<'a> -> 'a list
