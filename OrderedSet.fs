@@ -59,7 +59,7 @@ module OrderedSet =
             match s |> isEmpty with
             | true -> ls
             | false ->
-                let (f, _, l) = s
-                let fv = f.Value
-                inner (fv :: ls) (s |> remove fv)
-        (inner [] set) |> List.rev
+                let (_, _, l) = s
+                let lv = l.Value
+                inner (lv :: ls) (s |> remove lv)
+        inner [] set
