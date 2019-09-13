@@ -15,3 +15,5 @@ module OrderedSet =
     val toList : OrderedSet<'a> -> 'a list
 
     val contains : 'a -> OrderedSet<'a> -> bool
+
+    val count : OrderedSet<'a> -> int

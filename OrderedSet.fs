@@ -67,3 +67,7 @@ module OrderedSet =
     let contains (key: 'a) (set: OrderedSet<'a>) =
         let (_, s, l) = set
         s |> Map.containsKey key
+
+    let count (set: OrderedSet<'a>) =
+        let (_, s, l) = set
+        s |> Map.count
