@@ -64,6 +64,13 @@ module OrderedSet =
                 inner (lv :: ls) (s |> remove lv)
         inner [] set
 
+    let ofList (elements: 'a list) =
+        let rec inner (ls: 'a list) (set: OrderedSet<'a>) =
+            match ls with
+            | h :: t -> inner t (set |> add h)
+            | [] -> set
+        inner elements empty
+
     let contains (key: 'a) (set: OrderedSet<'a>) =
         let (_, s, l) = set
         s |> Map.containsKey key

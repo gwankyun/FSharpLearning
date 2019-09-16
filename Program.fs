@@ -34,4 +34,5 @@ let main argv =
     printfn "toList:%A" (os |> OrderedSet.toList)
     printfn "contains:%A" (os |> OrderedSet.contains 2)
     printfn "count:%A" (os |> OrderedSet.count)
+    printfn "ofList:%A" ([1; 2; 3] |> OrderedSet.ofList)
     0 // return an integer exit code
