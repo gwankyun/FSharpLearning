@@ -35,4 +35,5 @@ let main argv =
     printfn "contains:%A" (os |> OrderedSet.contains 2)
     printfn "count:%A" (os |> OrderedSet.count)
     printfn "ofList:%A" ([1; 2; 3] |> OrderedSet.ofList)
+    printfn "filter:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.filter (fun x -> x < 3))
     0 // return an integer exit code

@@ -19,3 +19,5 @@ module OrderedSet =
     val count : OrderedSet<'a> -> int
 
     val ofList : 'a list -> OrderedSet<'a>
+
+    val filter : ('a -> bool) -> OrderedSet<'a> -> OrderedSet<'a>

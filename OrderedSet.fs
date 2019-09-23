@@ -78,3 +78,6 @@ module OrderedSet =
     let count (set: OrderedSet<'a>) =
         let (_, s, l) = set
         s |> Map.count
+
+    let filter (predicate: 'a -> bool) (set: OrderedSet<'a>) =
+        set |> toList |> List.filter predicate |> ofList
