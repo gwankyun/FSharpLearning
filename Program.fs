@@ -36,4 +36,5 @@ let main argv =
     printfn "count:%A" (os |> OrderedSet.count)
     printfn "ofList:%A" ([1; 2; 3] |> OrderedSet.ofList)
     printfn "filter:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.filter (fun x -> x < 3))
+    printfn "map:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.map (fun x -> x * 2))
     0 // return an integer exit code

@@ -21,3 +21,5 @@ module OrderedSet =
     val ofList : 'a list -> OrderedSet<'a>
 
     val filter : ('a -> bool) -> OrderedSet<'a> -> OrderedSet<'a>
+
+    val map : ('a -> 'b) -> OrderedSet<'a> -> OrderedSet<'b>

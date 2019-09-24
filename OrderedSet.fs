@@ -81,3 +81,6 @@ module OrderedSet =
 
     let filter (predicate: 'a -> bool) (set: OrderedSet<'a>) =
         set |> toList |> List.filter predicate |> ofList
+
+    let map (mapping: 'a -> 'b) (set: OrderedSet<'a>) =
+        set |> toList |> List.map mapping |> ofList
