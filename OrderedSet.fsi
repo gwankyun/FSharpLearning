@@ -23,3 +23,5 @@ module OrderedSet =
     val filter : ('a -> bool) -> OrderedSet<'a> -> OrderedSet<'a>
 
     val map : ('a -> 'b) -> OrderedSet<'a> -> OrderedSet<'b>
+
+    val fold : ('a -> 'b -> 'a) -> 'a -> OrderedSet<'b> -> 'a

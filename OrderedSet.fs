@@ -84,3 +84,6 @@ module OrderedSet =
 
     let map (mapping: 'a -> 'b) (set: OrderedSet<'a>) =
         set |> toList |> List.map mapping |> ofList
+
+    let fold (folder: 'a -> 'b -> 'a) (state: 'a) (set: OrderedSet<'b>) =
+        set |> toList |> List.fold folder state
