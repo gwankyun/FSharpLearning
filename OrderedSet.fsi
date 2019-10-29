@@ -1,4 +1,4 @@
-﻿module OrderedSet
+﻿namespace OrderedSet
 
 type OrderedSet<'a when 'a : comparison> =
     'a option * Map<'a, 'a option * 'a option> * 'a option

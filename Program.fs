@@ -4,6 +4,8 @@ open System
 open Tree
 open Dict
 open OrderedSet
+open FsCheck
+open OrderedSetCheck
 
 [<EntryPoint>]
 let main argv =
@@ -28,14 +30,20 @@ let main argv =
     let dict = Dict.empty |> Dict.insert "3" 3 |> Dict.insert "7" 7 |> Dict.insert "2" 2 |> Dict.insert "1" 1
     printfn "dict:%A" dict
     let os = OrderedSet.empty |> OrderedSet.add 1 |> OrderedSet.add 2 |> OrderedSet.add 3
-    printfn "OrderedSet 1:%A" (os |> OrderedSet.remove 1)
-    printfn "OrderedSet 2:%A" (os |> OrderedSet.remove 2)
-    printfn "OrderedSet 3:%A" (os |> OrderedSet.remove 3)
-    printfn "toList:%A" (os |> OrderedSet.toList)
-    printfn "contains:%A" (os |> OrderedSet.contains 2)
-    printfn "count:%A" (os |> OrderedSet.count)
-    printfn "ofList:%A" ([1; 2; 3] |> OrderedSet.ofList)
-    printfn "filter:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.filter (fun x -> x < 3))
-    printfn "map:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.map (fun x -> x * 2))
-    printfn "fold:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.fold (fun a b -> a + b) 0)
+
+    Check.Quick OrderedSetCheck.add
+
+    Check.Quick OrderedSetCheck.ofList
+
+    Check.Quick OrderedSetCheck.count
+
+    Check.Quick OrderedSetCheck.isEmpty
+
+    Check.Quick OrderedSetCheck.contains
+
+    //printfn "toList:%A" (os |> OrderedSet.toList)
+    //printfn "ofList:%A" ([1; 2; 3] |> OrderedSet.ofList)
+    //printfn "filter:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.filter (fun x -> x < 3))
+    //printfn "map:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.map (fun x -> x * 2))
+    //printfn "fold:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.fold (fun a b -> a + b) 0)
     0 // return an integer exit code

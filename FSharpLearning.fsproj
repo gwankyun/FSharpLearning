@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Include="OrderedSet.fsi" />
     <Compile Include="OrderedSet.fs" />
+    <Compile Include="OrderedSetCheck.fs" />
     <Compile Include="Tree.fs" />
     <Compile Include="Dict.fs" />
     <Compile Include="Program.fs" />

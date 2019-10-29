@@ -1,4 +1,4 @@
-﻿module OrderedSet
+﻿namespace OrderedSet
 
 type OrderedSet<'a when 'a : comparison> =
     'a option * Map<'a, 'a option * 'a option> * 'a option
@@ -9,6 +9,40 @@ module OrderedSet =
     let isEmpty (set: OrderedSet<'a>) =
         let (_, s, _) = set
         s |> Map.isEmpty
+
+    let first (set: OrderedSet<'a>) =
+        let (f, _, _) = set
+        f.Value
+
+    let last (set: OrderedSet<'a>) =
+        let (_, _, l) = set
+        l.Value
+
+    let count (set: OrderedSet<'a>) =
+        let (_, s, _) = set
+        s |> Map.count
+
+    let removeFirst (set: OrderedSet<'a>) =
+        match set |> count with
+        | 1 -> empty
+        | _ ->
+            let (f, m, l) = set
+            let fv = f.Value
+            let (_, n) = m |> Map.find fv
+            let nv = n.Value
+            let (_, nn) = m |> Map.find nv
+            (n, m |> Map.remove fv |> Map.add nv (None, nn), l)
+
+    let removeLast (set: OrderedSet<'a>) =
+        match set |> count with
+        | 1 -> empty
+        | _ ->
+            let (f, m, l) = set
+            let lv = l.Value
+            let (p, _) = m |> Map.find lv
+            let pv = p.Value
+            let (pp, _) = m |> Map.find pv
+            (f, m |> Map.remove lv |> Map.add pv (pp, None), p)
 
     let add (key: 'a) (set: OrderedSet<'a>) : OrderedSet<'a> =
         let (f, s, l) = set
@@ -59,8 +93,9 @@ module OrderedSet =
             match s |> isEmpty with
             | true -> ls
             | false ->
-                let (_, _, l) = s
-                let lv = l.Value
+                //let (_, _, l) = s
+                //let lv = l.Value
+                let lv = s |> last
                 inner (lv :: ls) (s |> remove lv)
         inner [] set
 
@@ -74,10 +109,6 @@ module OrderedSet =
     let contains (key: 'a) (set: OrderedSet<'a>) =
         let (_, s, l) = set
         s |> Map.containsKey key
-
-    let count (set: OrderedSet<'a>) =
-        let (_, s, l) = set
-        s |> Map.count
 
     let filter (predicate: 'a -> bool) (set: OrderedSet<'a>) =
         set |> toList |> List.filter predicate |> ofList
