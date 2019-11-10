@@ -93,3 +93,15 @@ module ImmutableSortedSet =
         set
         |> toList
         |> List.exists predicate
+
+    let fold (folder: 'State -> 'T -> 'State) (state: 'State) (set: ImmutableSortedSet<'T>) =
+        set
+        |> toList
+        |> List.fold folder state
+
+    let foldBack (folder: 'T -> 'State -> 'State) (set: ImmutableSortedSet<'T>) (state: 'State) =
+        state
+        |> List.foldBack folder (
+            set
+            |> toList
+        )
