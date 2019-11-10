@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="ImmutableSortedSet.fs" />
     <Compile Include="OrderedSet.fsi" />
     <Compile Include="OrderedSet.fs" />
     <Compile Include="OrderedSetCheck.fs" />

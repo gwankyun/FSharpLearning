@@ -13,6 +13,37 @@ open ImmutableSortedSet
 //type StrComp< =
 //    interface with IComparer
 
+type ImmutableSortedSetCheck() =
+    static member list (elements: int list) =
+        let elements = elements |> List.distinct
+        elements = (elements |> ImmutableSortedSet.ofList |> ImmutableSortedSet.toList)
+
+    static member array (elements: int []) =
+        let elements = elements |> Array.distinct
+        elements = (elements |> ImmutableSortedSet.ofArray |> ImmutableSortedSet.toArray)
+
+    static member seq (elements: int list) =
+        let elements = elements |> Seq.toList |> List.distinct
+        elements = (elements |> ImmutableSortedSet.ofList |> ImmutableSortedSet.toList)
+
+    static member map (elements: int list) (mapping: int -> int) =
+        let a =
+            elements
+            |> ImmutableSortedSet.ofList
+            |> ImmutableSortedSet.map mapping
+            |> ImmutableSortedSet.toList
+        let b = elements |> List.map mapping |> List.distinct
+        a = b
+
+    static member filter (elements: int list) (predicate: int -> bool) =
+        let a =
+            elements
+            |> ImmutableSortedSet.ofList
+            |> ImmutableSortedSet.filter predicate
+            |> ImmutableSortedSet.toList
+        let b = elements |> List.filter predicate |> List.distinct
+        a = b
+
 type Comp() =
     interface IComparer<string> with
         member this.Compare(a: string, b: string) =
@@ -56,30 +87,15 @@ let main argv =
 
     Check.Quick OrderedSetCheck.removeFirst
 
-    let com = new Comp()
-
     let os =
-        ImmutableSortedSet.Create<string>({
-            new IComparer<string> with
-                member this.Compare(a: string, b: string) =
-                    match a = b with
-                    | true -> 0
-                    | false -> 1
-                })
-        |> ImmutableSortedSet.add "3"
-        |> ImmutableSortedSet.add "7"
-        |> ImmutableSortedSet.add "2"
-        |> ImmutableSortedSet.add "1"
-        |> ImmutableSortedSet.add "7"
+        ImmutableSortedSet.ofList ["3"; "7"; "2"; "1"]
 
     for i in os do
         printfn "%s" i
 
-    //Check.Quick OrderedSetCheck.remove
-
-    //printfn "toList:%A" (os |> OrderedSet.toList)
-    //printfn "ofList:%A" ([1; 2; 3] |> OrderedSet.ofList)
-    //printfn "filter:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.filter (fun x -> x < 3))
-    //printfn "map:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.map (fun x -> x * 2))
-    //printfn "fold:%A" ([1; 2; 3] |> OrderedSet.ofList |> OrderedSet.fold (fun a b -> a + b) 0)
+    Check.Quick ImmutableSortedSetCheck.list
+    Check.Quick ImmutableSortedSetCheck.array
+    Check.Quick ImmutableSortedSetCheck.seq
+    Check.Quick ImmutableSortedSetCheck.map
+    Check.Quick ImmutableSortedSetCheck.filter
     0 // return an integer exit code
