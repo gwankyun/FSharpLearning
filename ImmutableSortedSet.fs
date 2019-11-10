@@ -12,6 +12,9 @@ module ImmutableSortedSet =
                     | _ -> 1
         })
 
+    let isEmpty (set: ImmutableSortedSet<'T>) =
+        set.IsEmpty
+
     let emptyWith (comparer: IComparer<'T>) =
         ImmutableSortedSet.Create<'T>(comparer)
 
@@ -105,3 +108,23 @@ module ImmutableSortedSet =
             set
             |> toList
         )
+
+    let intersect (set1: ImmutableSortedSet<'T>) (set2: ImmutableSortedSet<'T>) =
+        set1.Intersect(set2)
+
+    let intersectMany (sets: seq<ImmutableSortedSet<'T>>) =
+        let sets = sets |> Seq.toList
+        let head = List.head sets
+        let tail = List.tail sets
+        tail
+        |> List.fold (fun s t -> s |> intersect t) head
+
+    let union (set1: ImmutableSortedSet<'T>) (set2: ImmutableSortedSet<'T>) =
+        set1.Union(set2)
+
+    let unionMany (sets: seq<ImmutableSortedSet<'T>>) =
+        let sets = sets |> Seq.toList
+        let head = List.head sets
+        let tail = List.tail sets
+        tail
+        |> List.fold (fun s t -> s |> union t) head
