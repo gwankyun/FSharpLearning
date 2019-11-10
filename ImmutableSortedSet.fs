@@ -18,6 +18,12 @@ module ImmutableSortedSet =
     let add (value: 'T) (set: ImmutableSortedSet<'T>) =
         set.Add(value)
 
+    let singleton (value: 'T) =
+        empty<'T> |> add value
+
+    let singletonWith (comparer: IComparer<'T>) (value: 'T) =
+        comparer |> emptyWith |> add value
+
     let count (set: ImmutableSortedSet<'T>) =
         set.Count
 
