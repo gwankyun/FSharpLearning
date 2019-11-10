@@ -31,7 +31,7 @@ module ImmutableSortedSet =
         set.Count
 
     let rev (set: ImmutableSortedSet<'T>) =
-        set.Reverse()
+        set.Reverse().ToImmutableSortedSet()
 
     let remove (value: 'T) (set: ImmutableSortedSet<'T>) =
         set.Remove(value)
@@ -51,15 +51,15 @@ module ImmutableSortedSet =
         elements
         |> Seq.fold (fun s t -> s |> add t) empty<'T>
 
-    let toSeq (set: ImmutableSortedSet<'T>) : 'T seq =
+    let toSeq (set: ImmutableSortedSet<'T>) =
         seq {
             for i in set.ToImmutableList() -> i
         }
 
-    let toList (set: ImmutableSortedSet<'T>) : 'T list =
+    let toList (set: ImmutableSortedSet<'T>) =
         set |> toSeq |> Seq.toList
 
-    let toArray (set: ImmutableSortedSet<'T>) : 'T [] =
+    let toArray (set: ImmutableSortedSet<'T>) =
         set |> toSeq |> Seq.toArray
 
     let ofListWith (comparer: IComparer<'T>) (elements: 'T list) =
