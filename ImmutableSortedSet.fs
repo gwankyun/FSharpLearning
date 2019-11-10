@@ -84,3 +84,12 @@ module ImmutableSortedSet =
         |> List.filter predicate
         |> List.distinct
         |> ofList
+
+    let difference (set1: ImmutableSortedSet<'T>) (set2: ImmutableSortedSet<'T>) =
+        set1
+        |> filter (fun v -> set2 |> contains v)
+
+    let exists (predicate: 'T -> bool) (set: ImmutableSortedSet<'T>) =
+        set
+        |> toList
+        |> List.exists predicate
