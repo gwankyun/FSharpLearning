@@ -6,6 +6,19 @@ open Dict
 open OrderedSet
 open FsCheck
 open OrderedSetCheck
+open System.Collections.Immutable
+open System.Collections.Generic
+open ImmutableSortedSet
+
+//type StrComp< =
+//    interface with IComparer
+
+type Comp() =
+    interface IComparer<string> with
+        member this.Compare(a: string, b: string) =
+            match a = b with
+            | true -> 0
+            | false -> 1
 
 [<EntryPoint>]
 let main argv =
@@ -40,6 +53,29 @@ let main argv =
     Check.Quick OrderedSetCheck.isEmpty
 
     Check.Quick OrderedSetCheck.contains
+
+    Check.Quick OrderedSetCheck.removeFirst
+
+    let com = new Comp()
+
+    let os =
+        ImmutableSortedSet.Create<string>({
+            new IComparer<string> with
+                member this.Compare(a: string, b: string) =
+                    match a = b with
+                    | true -> 0
+                    | false -> 1
+                })
+        |> ImmutableSortedSet.add "3"
+        |> ImmutableSortedSet.add "7"
+        |> ImmutableSortedSet.add "2"
+        |> ImmutableSortedSet.add "1"
+        |> ImmutableSortedSet.add "7"
+
+    for i in os do
+        printfn "%s" i
+
+    //Check.Quick OrderedSetCheck.remove
 
     //printfn "toList:%A" (os |> OrderedSet.toList)
     //printfn "ofList:%A" ([1; 2; 3] |> OrderedSet.ofList)
