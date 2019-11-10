@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Include="ImmutableSortedSet.fsi" />
     <Compile Include="ImmutableSortedSet.fs" />
+    <Compile Include="ImmutableSortedSetCheck.fs" />
     <Compile Include="OrderedSet.fsi" />
     <Compile Include="OrderedSet.fs" />
     <Compile Include="OrderedSetCheck.fs" />
