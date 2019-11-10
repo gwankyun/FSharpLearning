@@ -161,3 +161,13 @@ module ImmutableSortedSet =
         set
         |> toSeq
         |> Seq.iter action
+
+    let item (index: int) (set: ImmutableSortedSet<'T>) =
+        set.[index]
+
+    let head (set: ImmutableSortedSet<'T>) =
+        set.[0]
+
+    let tail (set: ImmutableSortedSet<'T>) =
+        let head = head set
+        set |> remove head
