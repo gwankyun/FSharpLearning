@@ -57,6 +57,14 @@ module ImmutableSortedSet =
         elements
         |> List.fold (fun s t -> s |> add t) (emptyWith comparer)
 
+    let ofArrayWith (comparer: IComparer<'T>) (array: 'T array) =
+        array
+        |> Array.fold (fun s t -> s |> add t) (emptyWith comparer)
+
+    let ofSeqWith (comparer: IComparer<'T>) (elements: 'T seq) =
+        elements
+        |> Seq.fold (fun s t -> s |> add t) (emptyWith comparer)
+
     let map (mapping: 'T -> 'U) (set: ImmutableSortedSet<'T>) =
         set
         |> toList
