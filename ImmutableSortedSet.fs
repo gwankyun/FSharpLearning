@@ -128,3 +128,36 @@ module ImmutableSortedSet =
         let tail = List.tail sets
         tail
         |> List.fold (fun s t -> s |> union t) head
+
+    let maxElement (set: ImmutableSortedSet<'T>) =
+        set.Max
+
+    let minElement (set: ImmutableSortedSet<'T>) =
+        set.Min
+
+    let partition (predicate: 'T -> bool) (set: ImmutableSortedSet<'T>) =
+        let a = set |> filter predicate
+        let b = set |> filter (fun v -> not (predicate v))
+        (a, b)
+
+    let isProperSubset (set1: ImmutableSortedSet<'T>) (set2: ImmutableSortedSet<'T>) =
+        set1.IsProperSubsetOf(set2)
+
+    let isProperSuperset (set1: ImmutableSortedSet<'T>) (set2: ImmutableSortedSet<'T>) =
+        set1.IsProperSupersetOf(set2)
+
+    let isSubset (set1: ImmutableSortedSet<'T>) (set2: ImmutableSortedSet<'T>) =
+        set1.IsSubsetOf(set2)
+
+    let isSuperset (set1: ImmutableSortedSet<'T>) (set2: ImmutableSortedSet<'T>) =
+        set1.IsSupersetOf(set2)
+
+    let forall (predicate: 'T -> bool) (set: ImmutableSortedSet<'T>) =
+        set
+        |> toSeq
+        |> Seq.forall predicate
+
+    let iter (action: 'T -> unit) (set: ImmutableSortedSet<'T>) =
+        set
+        |> toSeq
+        |> Seq.iter action
