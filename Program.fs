@@ -10,6 +10,7 @@ open System.Collections.Immutable
 open System.Collections.Generic
 open ImmutableSortedSet
 open ImmutableSortedSetCheck
+open ImmutableSortedMap
 
 type Comp() =
     interface IComparer<string> with
@@ -17,6 +18,15 @@ type Comp() =
             match a = b with
             | true -> 0
             | false -> 1
+
+type ImmutableSortedMapCheck() =
+    static member list (elements: (int * int) list) =
+        let m = elements |> Map.ofList
+        let key = elements |> List.map (fun (k, _) -> k) |> List.distinct |> List.map (fun x -> (x, m.[x]))
+        printfn "key: %A" key
+        let mapList = elements |> ImmutableSortedMap.ofList |> ImmutableSortedMap.toList
+        printfn "map: %A" mapList
+        key = mapList
 
 [<EntryPoint>]
 let main argv =
@@ -60,9 +70,21 @@ let main argv =
     for i in os do
         printfn "%s" i
 
+    let dict =
+        ImmutableSortedMap.empty<int, int>
+        |> ImmutableSortedMap.add 3 1
+        |> ImmutableSortedMap.add 7 2
+        |> ImmutableSortedMap.add 2 3
+        |> ImmutableSortedMap.add 1 4
+
+    //for i in dict do
+    //    printfn "%i: %i" i.Key i.Value
+
     Check.Quick ImmutableSortedSetCheck.list
     Check.Quick ImmutableSortedSetCheck.array
     Check.Quick ImmutableSortedSetCheck.seq
     Check.Quick ImmutableSortedSetCheck.map
     Check.Quick ImmutableSortedSetCheck.filter
+
+    Check.Quick ImmutableSortedMapCheck.list
     0 // return an integer exit code
