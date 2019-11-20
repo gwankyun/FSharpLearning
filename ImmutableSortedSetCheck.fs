@@ -23,6 +23,17 @@ type ImmutableSortedSetCheck() =
         let b = elements |> List.map mapping |> List.distinct
         a = b
 
+    static member add (elements: int list) (n: int) =
+        let elements = elements |> List.distinct
+        let a = elements |> List.append [n] |> List.distinct
+        let b =
+            elements
+            |> ImmutableSortedSet.ofList
+            |> ImmutableSortedSet.add n
+            |> ImmutableSortedSet.toList
+        printfn "%A %A" a b
+        a = b
+
     static member filter (elements: int list) (predicate: int -> bool) =
         let a =
             elements
@@ -31,3 +42,8 @@ type ImmutableSortedSetCheck() =
             |> ImmutableSortedSet.toList
         let b = elements |> List.filter predicate |> List.distinct
         a = b
+
+    static member equal (elements1: int list) (elements2: int list) =
+        let set1 = elements1 |> ImmutableSortedSet.ofList 
+        let set2 = elements2 |> ImmutableSortedSet.ofList 
+        (elements1 = elements2) = (set1 = set2)

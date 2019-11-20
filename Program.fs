@@ -52,17 +52,17 @@ let main argv =
     printfn "dict:%A" dict
     let os = OrderedSet.empty |> OrderedSet.add 1 |> OrderedSet.add 2 |> OrderedSet.add 3
 
-    Check.Quick OrderedSetCheck.add
+    //Check.Quick OrderedSetCheck.add
 
-    Check.Quick OrderedSetCheck.ofList
+    //Check.Quick OrderedSetCheck.ofList
 
-    Check.Quick OrderedSetCheck.count
+    //Check.Quick OrderedSetCheck.count
 
-    Check.Quick OrderedSetCheck.isEmpty
+    //Check.Quick OrderedSetCheck.isEmpty
 
-    Check.Quick OrderedSetCheck.contains
+    //Check.Quick OrderedSetCheck.contains
 
-    Check.Quick OrderedSetCheck.removeFirst
+    //Check.Quick OrderedSetCheck.removeFirst
 
     let os =
         ImmutableSortedSet.ofList ["3"; "7"; "2"; "1"]
@@ -85,6 +85,8 @@ let main argv =
     Check.Quick ImmutableSortedSetCheck.seq
     Check.Quick ImmutableSortedSetCheck.map
     Check.Quick ImmutableSortedSetCheck.filter
+    //Check.Quick ImmutableSortedSetCheck.add
+    Check.Quick ImmutableSortedSetCheck.equal
 
     //Check.Quick ImmutableSortedMapCheck.list
     0 // return an integer exit code
